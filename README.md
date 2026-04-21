@@ -1,9 +1,3 @@
-# AI Daily Brief
-
-<p align="center">
-  <strong>An automated AI news aggregation & briefing generator</strong>
-</p>
-
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.10+-blue.svg" alt="Python">
   <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
@@ -13,100 +7,104 @@
 </p>
 
 <p align="center">
-  <a href="#-features">Features</a> &bull;
-  <a href="#-quick-start">Quick Start</a> &bull;
-  <a href="#-configuration">Configuration</a> &bull;
-  <a href="#-architecture">Architecture</a> &bull;
-  <a href="#-sample-output">Sample Output</a> &bull;
-  <a href="#中文文档">中文文档</a>
+  <a href="README_EN.md">English</a> | <strong>中文</strong>
 </p>
 
 ---
 
-## Features
+<h1 align="center">AI 资讯简报生成器</h1>
 
-- **Multi-source Aggregation** — Fetch from 20+ RSS feeds, web pages, and ArXiv papers in a single run
-- **Smart Filtering** — Keyword-based include/exclude rules to surface only relevant AI news
-- **Auto Deduplication** — URL-level dedup across all sources
-- **Flexible Output** — Generate Markdown files or print to console
-- **Schedulable** — Designed for cron / CI integration; zero-downtime daily runs
-- **Configurable** — YAML-driven source list and keyword rules; add or remove sources without code changes
+<p align="center">
+  每天自动抓取 AI 领域最新资讯，一键生成结构化 Markdown 简报<br>
+  <strong>覆盖 20+ 官方博客、科技媒体与学术论文源</strong>
+</p>
 
-## Quick Start
+---
+
+## 功能特性
+
+- **多源聚合** — 一键抓取 RSS 订阅、网页源和 ArXiv 论文
+- **智能过滤** — 基于关键词的包含/排除规则，只保留你关心的 AI 资讯
+- **自动去重** — URL 级别跨源去重，告别重复信息
+- **灵活输出** — 生成 Markdown 文件或直接打印到终端
+- **定时任务** — 天然适配 cron / CI，每日零干预运行
+- **配置驱动** — YAML 配置源列表和过滤规则，增删资讯源无需改代码
+
+## 快速开始
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/<your-username>/ai-report.git
+# 1. 克隆项目
+git clone https://github.com/hanruxiang/ai-report.git
 cd ai-report
 
-# 2. Install dependencies
+# 2. 安装依赖
 pip install -r requirements.txt
 
-# 3. Generate today's briefing
+# 3. 生成今日简报
 python src/main.py
 ```
 
-The briefing will be saved to `output/AI简报_YYYYMMDD.md`.
+简报将保存到 `output/AI简报_YYYYMMDD.md`。
 
-### CLI Options
+### 命令行参数
 
-| Flag | Description | Default |
-|------|-------------|---------|
-| `-d, --days N` | Fetch news from the last N days | `1` |
-| `-o, --output PATH` | Custom output file path | `output/` |
-| `-f, --format` | Output format: `markdown` or `console` | `markdown` |
-| `--web` | Enable web scraping (slower) | off |
-| `--no-arxiv` | Skip ArXiv papers | off |
-| `-c, --config PATH` | Custom config file | `config/sources.yaml` |
-| `-v, --verbose` | Debug-level logging | off |
+| 参数 | 说明 | 默认值 |
+|------|------|--------|
+| `-d, --days N` | 获取最近 N 天的资讯 | `1` |
+| `-o, --output PATH` | 自定义输出路径 | `output/` |
+| `-f, --format` | 输出格式：`markdown` 或 `console` | `markdown` |
+| `--web` | 启用网页抓取（较慢） | 关闭 |
+| `--no-arxiv` | 跳过 ArXiv 论文 | 关闭 |
+| `-c, --config PATH` | 使用自定义配置文件 | `config/sources.yaml` |
+| `-v, --verbose` | 开启调试日志 | 关闭 |
 
-### Examples
+### 使用示例
 
 ```bash
-# 3-day briefing with web scraping
+# 获取最近 3 天的资讯，启用网页抓取
 python src/main.py --days 3 --web
 
-# Console output only (no file)
+# 仅控制台输出
 python src/main.py --format console
 
-# Custom config and output
-python src/main.py -c my_sources.yaml -o ~/briefing.md
+# 使用自定义配置和输出路径
+python src/main.py -c my_sources.yaml -o ~/AI简报.md
 ```
 
-### Cron Scheduling
+### 定时任务
 
 ```bash
-# Run daily at 08:00
+# 每天早上 8 点自动生成简报
 crontab -e
-# Add:
+# 添加以下行：
 0 8 * * * cd /path/to/ai-report && python src/main.py >> log.txt 2>&1
 ```
 
-## Configuration
+## 配置说明
 
-Edit `config/sources.yaml` to customize sources and filters.
+编辑 `config/sources.yaml` 自定义资讯源和过滤规则。
 
-### Adding an RSS Source
+### 添加 RSS 源
 
 ```yaml
 rss_sources:
-  - name: "My AI Blog"
+  - name: "我的 AI 博客"
     url: "https://example.com/feed.xml"
-    category: "Company Name"
-    language: "en"   # en | zh
+    category: "公司名称"
+    language: "zh"   # en | zh
 ```
 
-### Adding a Web Source
+### 添加网页源
 
 ```yaml
 web_sources:
-  - name: "Some AI News"
+  - name: "某 AI 新闻"
     url: "https://example.com/news"
-    category: "Category"
+    category: "分类"
     language: "zh"
 ```
 
-### Keyword Filtering
+### 关键词过滤
 
 ```yaml
 keywords:
@@ -119,123 +117,96 @@ keywords:
     - "财报"
 ```
 
-## Architecture
+## 项目结构
 
 ```
 ai-report/
 ├── src/
-│   ├── main.py                 # Entry point & CLI
+│   ├── main.py                 # 主程序入口 & CLI
 │   ├── fetchers/
-│   │   ├── rss_fetcher.py      # RSS feed parser (feedparser)
-│   │   └── web_fetcher.py      # Web scraper (requests + BS4) & ArXiv API
+│   │   ├── rss_fetcher.py      # RSS 抓取（feedparser）
+│   │   └── web_fetcher.py      # 网页抓取（requests + BS4）& ArXiv API
 │   └── formatters/
-│       └── markdown.py         # Markdown & console formatters
+│       └── markdown.py         # Markdown & 终端格式化输出
 ├── config/
-│   └── sources.yaml            # Source list & keyword rules
-├── output/                     # Generated briefings
+│   └── sources.yaml            # 资讯源配置 & 关键词规则
+├── output/                     # 生成的简报文件
 ├── docs/
-│   └── examples/               # Sample output
+│   └── examples/               # 示例输出
 ├── requirements.txt
 ├── LICENSE
 └── README.md
 ```
 
-### Data Flow
+## 数据流
 
 ```
 ┌─────────────┐   ┌─────────────┐   ┌─────────────┐
-│  RSS Feeds  │   │ Web Pages   │   │   ArXiv     │
+│  RSS 订阅源  │   │   网页源     │   │  ArXiv 论文  │
 └──────┬──────┘   └──────┬──────┘   └──────┬──────┘
        │                 │                 │
        └────────────┬────┘─────────────────┘
                     │
             ┌───────▼───────┐
-            │   Deduplicate │
-            │  (by URL)     │
+            │   自动去重     │
+            │  （按 URL）    │
             └───────┬───────┘
                     │
             ┌───────▼───────┐
-            │ Keyword Filter│
+            │  关键词过滤    │
             └───────┬───────┘
                     │
           ┌─────────▼─────────┐
-          │   Formatter       │
-          │ (Markdown/Console)│
+          │   格式化输出       │
+          │（Markdown/终端）   │
           └─────────┬─────────┘
                     │
             ┌───────▼───────┐
-            │  Output File  │
+            │  简报文件      │
             └───────────────┘
 ```
 
-## Covered Sources
+## 覆盖资讯源
 
-### Official Blogs (RSS)
-OpenAI, Google AI, Meta AI, Microsoft AI, Microsoft Research, NVIDIA, Mistral AI, Hugging Face
+### 官方博客（RSS）
+OpenAI、Google AI、Meta AI、Microsoft AI、Microsoft Research、NVIDIA、Mistral AI、Hugging Face
 
-### Web Sources
-Anthropic, xAI, Google DeepMind, Apple ML, DeepSeek, Zhipu AI, Tongyi Qianwen, Kimi (Moonshot), MiniMax, GitHub Trending AI, LM Arena, Hugging Face Trending
+### 网页源
+Anthropic、xAI、Google DeepMind、Apple ML、DeepSeek、智谱 AI、通义千问、Kimi（月之暗面）、MiniMax、GitHub Trending AI、LM Arena、Hugging Face Trending
 
-### Academic
-ArXiv CS.AI (latest submissions)
+### 学术论文
+ArXiv CS.AI（最新提交）
 
-## Sample Output
+## 示例输出
 
-See [`docs/examples/`](docs/examples/) for a full sample briefing.
+查看 [`docs/examples/`](docs/examples/) 获取完整示例简报。
 
-Excerpt:
+摘录：
 
 > **OpenAI 发布 GPT-5.4 mini 与 GPT-5.4 nano 模型**
 >
 > GPT-5.4 mini 在编码、多模态理解、工具调用及计算机操控能力上显著优于上一代 GPT-5 mini，运行速度提升超过 2 倍...
 
-## Tech Stack
+## 技术栈
 
-| Component | Technology |
-|-----------|-----------|
-| RSS Parsing | [feedparser](https://github.com/kurtmckee/feedparser) |
-| Web Scraping | [requests](https://docs.python-requests.org/) + [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/) |
-| HTML Parsing | [lxml](https://lxml.de/) |
-| Config | [PyYAML](https://pyyaml.org/) |
-| ArXiv API | Atom feed via `xml.etree` |
+| 组件 | 技术方案 |
+|------|---------|
+| RSS 解析 | [feedparser](https://github.com/kurtmckee/feedparser) |
+| 网页抓取 | [requests](https://docs.python-requests.org/) + [BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/) |
+| HTML 解析 | [lxml](https://lxml.de/) |
+| 配置管理 | [PyYAML](https://pyyaml.org/) |
+| ArXiv 接口 | Atom Feed + `xml.etree` |
 
-## Contributing
+## 参与贡献
 
-Contributions welcome! Please:
+欢迎提交贡献！
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feat/my-feature`)
-3. Commit your changes (`git commit -m 'feat: add ...'`)
-4. Push to the branch (`git push origin feat/my-feature`)
-5. Open a Pull Request
+1. Fork 本仓库
+2. 创建特性分支（`git checkout -b feat/my-feature`）
+3. 提交更改（`git commit -m 'feat: 添加 ...'`）
+4. 推送到分支（`git push origin feat/my-feature`）
+5. 发起 Pull Request
 
-## License
+## 许可证
 
 [MIT](LICENSE)
-
----
-
-## 中文文档
-
-每天自动抓取 AI 相关资讯并生成 Markdown 简报。支持 RSS、网页抓取和 ArXiv 论文获取，内置关键词过滤和自动去重。
-
-### 功能特性
-
-- 支持 20+ RSS 源和网页源
-- 自动去重和关键词过滤
-- 输出 Markdown 文件或控制台打印
-- YAML 配置驱动，无需改代码即可增减源
-- 适配 cron 定时任务
-
-### 快速开始
-
-```bash
-pip install -r requirements.txt
-python src/main.py
-```
-
-### 注意事项
-
-1. 部分网站有反爬措施，网页抓取可能不稳定，建议优先使用 RSS 源
-2. 首次运行可能需要较长时间（需逐个拉取源）
-3. 建议配置 cron 定时执行，每日自动生成简报
