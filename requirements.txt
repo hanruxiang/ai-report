@@ -1,0 +1,14 @@
+# AI资讯简报生成器 依赖
+
+# RSS抓取
+feedparser>=6.0.10
+
+# 网页抓取
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# 配置文件解析
+pyyaml>=6.0
+
+# 可选：更好的HTML解析
+lxml>=4.9.0

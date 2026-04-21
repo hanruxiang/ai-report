@@ -1,0 +1,240 @@
+# AI资讯源配置 - 仅关注目标公司官方动态
+
+# RSS源（公司官方博客和发布渠道）
+rss_sources:
+  # ===== 国外AI巨头与明星初创 =====
+
+  - name: "OpenAI Blog"
+    url: "https://openai.com/blog/rss.xml"
+    category: "OpenAI"
+    language: "en"
+
+  - name: "Google AI Blog"
+    url: "https://blog.google/technology/ai/rss/"
+    category: "Google"
+    language: "en"
+
+  - name: "Meta AI Blog"
+    url: "https://ai.meta.com/blog/feed/"
+    category: "Meta"
+    language: "en"
+
+  - name: "Microsoft AI Blog"
+    url: "https://blogs.microsoft.com/ai/feed/"
+    category: "Microsoft"
+    language: "en"
+
+  - name: "Microsoft Research Blog"
+    url: "https://www.microsoft.com/en-us/research/blog/feed/"
+    category: "Microsoft Research"
+    language: "en"
+
+  - name: "NVIDIA Blog"
+    url: "https://blogs.nvidia.com/feed/"
+    category: "NVIDIA"
+    language: "en"
+
+  - name: "NVIDIA Technical Blog"
+    url: "https://developer.nvidia.com/blog/feed/"
+    category: "NVIDIA"
+    language: "en"
+
+  - name: "Mistral AI Blog"
+    url: "https://mistral.ai/news/rss.xml"
+    category: "Mistral"
+    language: "en"
+
+  # ===== 开源社区与开发者平台 =====
+
+  - name: "Hugging Face Blog"
+    url: "https://huggingface.co/blog/feed.xml"
+    category: "Hugging Face"
+    language: "en"
+
+# 网页抓取源（针对没有RSS的公司）
+web_sources:
+  # ===== 国内AI公司 =====
+
+  - name: "智谱AI动态"
+    url: "https://www.zhipuai.cn/news"
+    category: "智谱AI"
+    language: "zh"
+
+  - name: "DeepSeek新闻"
+    url: "https://www.deepseek.com/news"
+    category: "DeepSeek"
+    language: "zh"
+
+  - name: "阿里云通义千问博客"
+    url: "https://tongyi.aliyun.com/blog"
+    category: "阿里巴巴"
+    language: "zh"
+
+  - name: "月之暗面 Kimi"
+    url: "https://www.moonshot.cn"
+    category: "月之暗面"
+    language: "zh"
+
+  - name: "MiniMax"
+    url: "https://www.minimaxi.com"
+    category: "MiniMax"
+    language: "zh"
+
+  # ===== 国外AI公司（无RSS的）=====
+
+  - name: "Anthropic News"
+    url: "https://www.anthropic.com/news"
+    category: "Anthropic"
+    language: "en"
+
+  - name: "xAI Blog"
+    url: "https://x.ai/blog"
+    category: "xAI"
+    language: "en"
+
+  - name: "Google DeepMind"
+    url: "https://deepmind.google/discover/"
+    category: "Google DeepMind"
+    language: "en"
+
+  - name: "Apple Machine Learning Research"
+    url: "https://machinelearning.apple.com"
+    category: "Apple"
+    language: "en"
+
+  # ===== 开源社区与开发者平台 =====
+
+  - name: "GitHub Trending AI"
+    url: "https://github.com/trending/artificial-intelligence"
+    category: "GitHub"
+    language: "en"
+
+  - name: "LM Arena (Chatbot Arena)"
+    url: "https://lmarena.ai"
+    category: "LM Arena"
+    language: "en"
+
+  - name: "Hugging Face Trending Models"
+    url: "https://huggingface.co/models?pipeline_tag=text-generation&sort=trending"
+    category: "Hugging Face"
+    language: "en"
+
+# 关键词过滤（仅保留目标公司相关关键词）
+keywords:
+  include:
+    # ===== 国外公司 =====
+    - "OpenAI"
+    - "ChatGPT"
+    - "GPT-4"
+    - "GPT-4o"
+    - "o1"
+    - "Sora"
+    - "DALL-E"
+    - "Whisper"
+
+    - "Google"
+    - "DeepMind"
+    - "Gemini"
+    - "AlphaGo"
+    - "AlphaFold"
+    - "PaLM"
+    - "Gemini"
+
+    - "Anthropic"
+    - "Claude"
+
+    - "Meta"
+    - "Llama"
+    - "LLaMA"
+
+    - "xAI"
+    - "Grok"
+
+    - "Microsoft"
+    - "Copilot"
+    - "Azure AI"
+
+    - "Apple"
+    - "Apple Intelligence"
+    - "Siri"
+    - "MLX"
+
+    - "NVIDIA"
+    - "Nvidia"
+    - "CUDA"
+    - "TensorRT"
+
+    - "Mistral"
+
+    # ===== 国内公司 =====
+    - "智谱"
+    - "GLM"
+    - "ChatGLM"
+
+    - "通义千问"
+    - "Qwen"
+    - "Tongyi"
+
+    - "腾讯"
+    - "混元"
+    - "Hunyuan"
+
+    - "字节跳动"
+    - "豆包"
+    - "Doubao"
+
+    - "月之暗面"
+    - "Kimi"
+    - "Moonshot"
+
+    - "DeepSeek"
+    - "深度求索"
+
+    - "MiniMax"
+
+    - "阶跃星辰"
+    - "StepFun"
+
+    - "百川"
+    - "Baichuan"
+
+    # ===== 开源平台 =====
+    - "Hugging Face"
+    - "Transformers"
+    - "Diffusers"
+    - "PEFT"
+
+    - "GitHub"
+    - "LMSYS"
+    - "LM Arena"
+    - "Chatbot Arena"
+
+    # ===== AI技术关键词（仅与模型发布相关的）=====
+    - "大模型"
+    - "LLM"
+    - "模型发布"
+    - "新模型"
+    - "发布"
+    - "发布"
+    - "announcement"
+    - "announce"
+    - "release"
+    - "launch"
+
+  exclude:
+    # 排除财经相关
+    - "股价"
+    - "财报"
+    - "股票"
+    - " earnings"
+    - " stock"
+    - "市值"
+
+    # 排除招聘相关
+    - "招聘"
+    - "hiring"
+    - "we are hiring"
+
+    # 排除裁员相关
+    - "裁员"
+    - "layoff"
